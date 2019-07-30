@@ -10,4 +10,8 @@ class BetterSocket {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
+
+  static Future<void> connentSocket(String path) async {
+    await _channel.invokeListMethod('connentSocket',<String, String>{'path': path});
+  }
 }

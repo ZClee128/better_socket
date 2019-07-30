@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-
+  
   @override
   void initState() {
     super.initState();
@@ -26,6 +26,7 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await BetterSocket.platformVersion;
+      BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest");
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -39,6 +40,8 @@ class _MyAppState extends State<MyApp> {
       _platformVersion = platformVersion;
     });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
