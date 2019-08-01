@@ -4,7 +4,7 @@
 
 @interface BetterSocketPlugin()<SRWebSocketDelegate>
 @property (nonatomic,strong) SRWebSocket *webSocket;
-
+@property (nonatomic,copy)FlutterResult myResult;
 @end
 
 @implementation BetterSocketPlugin
@@ -17,19 +17,23 @@
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getPlatformVersion" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
-  } else if ([@"connentSocket" isEqualToString:call.method]) {
-      NSDictionary *dict = call.arguments;
-      self.webSocket.delegate = nil;
-      [self.webSocket close];
-      self.webSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"path"]]]];
-      self.webSocket.delegate = self;
-      [self.webSocket open];
-  }
-  else {
-    result(FlutterMethodNotImplemented);
-  }
+    self.myResult = result;
+    if ([@"getPlatformVersion" isEqualToString:call.method]) {
+        result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
+    } else if ([@"connentSocket" isEqualToString:call.method]) {
+        NSDictionary *dict = call.arguments;
+        self.webSocket.delegate = nil;
+        [self.webSocket close];
+        self.webSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"path"]]]];
+        self.webSocket.delegate = self;
+        [self.webSocket open];
+    } else if ([@"sendMsg" isEqualToString:call.method]){
+        NSDictionary *dict = call.arguments;
+        [self.webSocket send:dict[@"msg"]];
+    }
+    else {
+        result(FlutterMethodNotImplemented);
+    }
 }
 
 
@@ -39,6 +43,7 @@
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
     NSLog(@"Websocket Connected");
+    self.myResult(@(YES));
 }
 
 //连接失败

@@ -26,7 +26,10 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await BetterSocket.platformVersion;
-      BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest");
+      BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest").then((val){
+        print(val);
+        BetterSocket.sendMsg("hello");
+      });
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -42,7 +45,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

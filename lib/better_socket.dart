@@ -11,7 +11,12 @@ class BetterSocket {
     return version;
   }
 
-  static Future<void> connentSocket(String path) async {
-    await _channel.invokeListMethod('connentSocket',<String, String>{'path': path});
+  static Future<bool> connentSocket(String path) async {
+    final bool ok = await _channel.invokeMethod('connentSocket',<String, String>{'path': path});
+    return ok;
+  }
+
+  static Future<void> sendMsg(String msg) async {
+    await _channel.invokeMethod('sendMsg',<String,String>{'msg': msg});
   }
 }

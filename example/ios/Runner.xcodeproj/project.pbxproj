@@ -89,7 +89,6 @@
 				3ED5EFECC614322BAEB216BE /* Pods-Runner.release.xcconfig */,
 				334B68B1BFA3947F9C0EFF2E /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -394,7 +393,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kinsomy.betterSocketExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lee.betterSocketExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -523,7 +522,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kinsomy.betterSocketExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lee.betterSocketExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -546,7 +545,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kinsomy.betterSocketExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lee.betterSocketExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
