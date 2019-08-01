@@ -18,7 +18,12 @@ class BetterSocketPlugin: MethodCallHandler {
   override fun onMethodCall(call: MethodCall, result: Result) {
     if (call.method == "getPlatformVersion") {
       result.success("Android ${android.os.Build.VERSION.RELEASE}")
-    } else {
+    } else if (call.method == "connentSocket"){
+
+    } else if (call.method == "close") {
+
+    }
+    else {
       result.notImplemented()
     }
   }

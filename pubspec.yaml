@@ -1,8 +1,8 @@
 name: better_socket
 description: A new flutter plugin project.
 version: 0.0.1
-author:
-homepage:
+author: lizhicong <876231865@qq.com>
+homepage: https://github.com/ZClee128/better_socket
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
