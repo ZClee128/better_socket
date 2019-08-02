@@ -10,3 +10,6 @@
 
 ## 1.0.3
 * Increase the score
+
+## 1.0.4
+* Increase the score
