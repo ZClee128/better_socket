@@ -10,9 +10,10 @@ class BetterSocket {
     return version;
   }
 
-  static Future<bool> connentSocket(String path) async {
+  static Future<bool> connentSocket(String path, {Map<String, String> httpHeaders}) async {
     //TODO 这块写得有问题。连接socket是异步的。同步等待结果不合理
-    final bool ok = await _channel.invokeMethod('connentSocket', <String, String>{'path': path});
+    final bool ok =
+        await _channel.invokeMethod('connentSocket', {'path': path, "httpHeaders": httpHeaders});
     return ok;
   }
 

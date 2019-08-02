@@ -2,14 +2,15 @@ package com.kinsomy.better_socket
 
 import android.os.Handler
 import android.os.Message
-import android.util.Log
 import org.java_websocket.client.WebSocketClient
+import org.java_websocket.drafts.Draft
+import org.java_websocket.drafts.Draft_6455
 import org.java_websocket.handshake.ServerHandshake
 import java.lang.Exception
 import java.net.URI
 
-class BetterWebSocketClient(uri: URI, var queuingEventSink: QueuingEventSink) : WebSocketClient(uri) {
-
+class BetterWebSocketClient @JvmOverloads
+constructor(serverUri: URI, var queuingEventSink: QueuingEventSink, protocolDraft: Draft = Draft_6455(), httpHeaders: Map<String, String>? = null, connectTimeout: Int = 0) : WebSocketClient(serverUri, protocolDraft, httpHeaders, connectTimeout) {
 
     var handler: Handler = Handler {
         queuingEventSink.success(it.obj)
@@ -17,8 +18,6 @@ class BetterWebSocketClient(uri: URI, var queuingEventSink: QueuingEventSink) : 
     }
 
     override fun onOpen(handshakedata: ServerHandshake?) {
-        Log.i("onOpen", "onOpen")
-
         val eventResult = HashMap<String, Any>()
         eventResult["event"] = "onOpen"
         eventResult["code"] = 0
@@ -32,7 +31,6 @@ class BetterWebSocketClient(uri: URI, var queuingEventSink: QueuingEventSink) : 
     }
 
     override fun onClose(code: Int, reason: String?, remote: Boolean) {
-        Log.i("onClose", reason)
 
         val eventResult = HashMap<String, Any>()
         eventResult["event"] = "onClose"
@@ -44,11 +42,9 @@ class BetterWebSocketClient(uri: URI, var queuingEventSink: QueuingEventSink) : 
         m.obj = eventResult
         handler.sendMessage(m)
 
-
     }
 
     override fun onMessage(message: String?) {
-        Log.i("onMessage", message)
         val eventResult = HashMap<String, Any>()
         eventResult["event"] = "onMessage"
         eventResult["message"] = message.toString()
@@ -59,7 +55,6 @@ class BetterWebSocketClient(uri: URI, var queuingEventSink: QueuingEventSink) : 
     }
 
     override fun onError(ex: Exception?) {
-        Log.i("onError", ex?.message)
         val eventResult = HashMap<String, Any>()
         eventResult["event"] = "onError"
         eventResult["message"] = ex?.message.toString()
