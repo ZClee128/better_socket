@@ -30,6 +30,7 @@ class _MyAppState extends State<MyApp> {
       //设置监听
       BetterSocket.addListener(onOpen: (httpStatus, httpStatusMessage) {
         print("onOpen---httpStatus:$httpStatus  httpStatusMessage:$httpStatusMessage");
+        BetterSocket.sendMsg("hello");
       }, onMessage: (message) {
         print("onMessage---message:$message");
       }, onClose: (code, reason, remote) {
@@ -37,8 +38,10 @@ class _MyAppState extends State<MyApp> {
       }, onError: (message) {
         print("onError---message:$message");
       });
+      var headers = {"origin": "ws://123.207.167.163:9010/ajaxchattest"};
 
-      BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest").then((val) {
+      BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest", httpHeaders: headers)
+          .then((val) {
         print(val);
         //BetterSocket.sendMsg("hello");
       });
