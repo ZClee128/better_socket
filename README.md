@@ -31,7 +31,8 @@ class _WebSocketRouteState extends State<WebSocketRoute> {
   @override
   void initState() {
     //创建websocket连接
-    BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest");
+    var headers = {"origin": "ws://123.207.167.163:9010/ajaxchattest"};
+    BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest", httpHeaders: headers);
   }
 
   @override
