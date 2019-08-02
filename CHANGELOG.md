@@ -1,6 +1,9 @@
 ## 0.0.1
 ## 1.0.0
-* 发布完整1.0.0版本.
+* Publish full version 1.0.0.
 
 ## 1.0.1
-* 修复使用bug
+* Fix bugs
+
+## 1.0.2
+* Increase the score

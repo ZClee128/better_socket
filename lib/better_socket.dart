@@ -10,8 +10,10 @@ class BetterSocket {
     return version;
   }
 
-  static Future connentSocket(String path, {Map<String, String> httpHeaders}) async {
-    _channel.invokeMethod('connentSocket', {'path': path, "httpHeaders": httpHeaders});
+  static Future connentSocket(String path,
+      {Map<String, String> httpHeaders}) async {
+    _channel.invokeMethod(
+        'connentSocket', {'path': path, "httpHeaders": httpHeaders});
   }
 
   static Future<void> sendMsg(String msg) async {
@@ -23,7 +25,10 @@ class BetterSocket {
   }
 
   static void addListener(
-      {Function onOpen, Function onMessage, Function onError, Function onClose}) {
+      {Function onOpen,
+      Function onMessage,
+      Function onError,
+      Function onClose}) {
     EventChannel eventChannel = EventChannel("better_socket/event");
     eventChannel.receiveBroadcastStream().listen((data) {
       print(data);
