@@ -1,6 +1,6 @@
 name: better_socket
-description: This is a websocket integrated with native iOS and Android native websocket, striving to be a perfect websocket plug-in. Some people have reported that dart's websocket configuration is troublesome, which is the original intention of this plug-in.
-version: 1.0.2
+description: This is a websocket integrated with native iOS and Android native websocket. Some people have reported that dart's websocket configuration is troublesome, which is the original intention of this plug-in.
+version: 1.0.3
 author: lizhicong <876231865@qq.com>
 homepage: https://github.com/ZClee128/better_socket
 
