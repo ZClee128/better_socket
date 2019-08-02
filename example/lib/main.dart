@@ -40,11 +40,7 @@ class _MyAppState extends State<MyApp> {
       });
       var headers = {"origin": "ws://123.207.167.163:9010/ajaxchattest"};
 
-      BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest", httpHeaders: headers)
-          .then((val) {
-        print(val);
-        //BetterSocket.sendMsg("hello");
-      });
+      BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest", httpHeaders: headers);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }

@@ -1,6 +1,6 @@
 name: better_socket
-description: A new flutter plugin project.
-version: 0.0.1
+description: 这是一个集成原生iOS的websocket和安卓原生的websocket，力争做一个完美的websocket插件。有人反映dart的websocket配置很麻烦，就是做这个插件的初衷。
+version: 1.0.0
 author: lizhicong <876231865@qq.com>
 homepage: https://github.com/ZClee128/better_socket
 
