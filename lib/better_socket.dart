@@ -15,7 +15,11 @@ class BetterSocket {
   }
 
   static Future<void> sendMsg(String msg) async {
-    await _channel.invokeMethod('sendMsg', <String, String>{'msg': msg});
+    _channel.invokeMethod('sendMsg', <String, String>{'msg': msg});
+  }
+
+  static Future close() async {
+    _channel.invokeMethod('close');
   }
 
   static void addListener(

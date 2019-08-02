@@ -68,4 +68,10 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    BetterSocket.close();
+    super.dispose();
+  }
 }

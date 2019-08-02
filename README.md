@@ -15,54 +15,77 @@ samples, guidance on mobile development, and a full API reference.
 
 # 使用
 ```OC
-import 'package:flutter/material.dart';
+iimport 'package:flutter/material.dart';
 import 'package:better_socket/better_socket.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatefulWidget {
+class WebSocketRoute extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _WebSocketRouteState createState() => new _WebSocketRouteState();
 }
 
-class _MyAppState extends State<MyApp> {
-  String _msg = "";
+class _WebSocketRouteState extends State<WebSocketRoute> {
+  TextEditingController _controller = new TextEditingController();
+  // IOWebSocketChannel channel;
+  String _text = "";
+
   @override
   void initState() {
-    super.initState();
-    // 初始化socket
-    BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest")
-        .then((val) {
-      //   print(val);
-    });
+    //创建websocket连接
+    BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest");
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Column(
+    BetterSocket.addListener(onOpen: (httpStatus, httpStatusMessage) {
+      print(
+          "onOpen---httpStatus:$httpStatus  httpStatusMessage:$httpStatusMessage");
+    }, onMessage: (message) {
+      setState(() {
+        _text = message;
+      });
+      print("onMessage---message:$message");
+    }, onClose: (code, reason, remote) {
+      print("onClose---code:$code  reason:$reason  remote:$remote");
+    }, onError: (message) {
+      print("onError---message:$message");
+    });
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("WebSocket(内容回显)"),
+      ),
+      body: new Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            RaisedButton(
-              child: Text('发送消息'),
-              onPressed: () {
-              // 发送消息
-                BetterSocket.sendMsg("hello").then((msg) {
-                  setState(() {
-                    _msg = msg;
-                  });
-                });
-              },
+            new Form(
+              child: new TextFormField(
+                controller: _controller,
+                decoration: new InputDecoration(labelText: 'Send a message'),
+              ),
             ),
-            Text(_msg)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24.0),
+              child: new Text(_text),
+            ),
           ],
         ),
       ),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: _sendMessage,
+        tooltip: 'Send message',
+        child: new Icon(Icons.send),
+      ),
     );
   }
+
+  void _sendMessage() {
+    if (_controller.text.isNotEmpty) {
+      // channel.sink.add(_controller.text);
+      BetterSocket.sendMsg(_controller.text);
+    }
+  }
+
   @override
   void dispose() {
     BetterSocket.close();
@@ -70,5 +93,3 @@ class _MyAppState extends State<MyApp> {
   }
 }
 ```
-＃ Todo
-安卓还没有接入

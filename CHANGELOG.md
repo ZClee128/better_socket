@@ -1,3 +1,6 @@
 ## 0.0.1
+## 1.0.0
+* 发布完整1.0.0版本.
 
-* TODO: Describe initial release.
+## 1.0.1
+* 修复使用bug
