@@ -82,7 +82,6 @@ class _WebSocketRouteState extends State<WebSocketRoute> {
 
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
-      // channel.sink.add(_controller.text);
       BetterSocket.sendMsg(_controller.text);
     }
   }
