@@ -33,10 +33,6 @@ class _WebSocketRouteState extends State<WebSocketRoute> {
     //创建websocket连接
     var headers = {"origin": "ws://123.207.167.163:9010/ajaxchattest"};
     BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest", httpHeaders: headers);
-  }
-
-  @override
-  Widget build(BuildContext context) {
     BetterSocket.addListener(onOpen: (httpStatus, httpStatusMessage) {
       print(
           "onOpen---httpStatus:$httpStatus  httpStatusMessage:$httpStatusMessage");
@@ -50,6 +46,10 @@ class _WebSocketRouteState extends State<WebSocketRoute> {
     }, onError: (message) {
       print("onError---message:$message");
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("WebSocket(内容回显)"),
