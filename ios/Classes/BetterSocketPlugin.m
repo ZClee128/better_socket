@@ -28,14 +28,19 @@
         NSDictionary *dict = call.arguments;
         self.webSocket.delegate = nil;
         [self.webSocket close];
-//        NSDictionary *hedaer = dict[@"httpHeaders"];
+        //        NSDictionary *hedaer = dict[@"httpHeaders"];
         self.webSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"path"]]]];
         self.webSocket.delegate = self;
         [self.webSocket open];
     } else if ([@"sendMsg" isEqualToString:call.method]){
         NSDictionary *dict = call.arguments;
         [self.webSocket send:dict[@"msg"]];
-    } else if ([@"close" isEqualToString:call.method]) {
+    } else if ([@"sendByteMsg" isEqualToString:call.method]){
+        NSDictionary *dict = call.arguments;
+        NSData *data = [NSData dataWithData:[dict[@"msg"] data]];
+        [self.webSocket send:data];
+    }
+    else if ([@"close" isEqualToString:call.method]) {
         [self.webSocket close];
     }
     else {

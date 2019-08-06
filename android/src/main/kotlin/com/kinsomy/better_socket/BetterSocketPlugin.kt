@@ -48,6 +48,12 @@ class BetterSocketPlugin() : MethodCallHandler {
             call.method == "sendMsg" -> {
                 val msg = call.argument<String>("msg")
                 if (betterWebSocketClient?.isOpen == true)
+                        betterWebSocketClient?.send(msg)
+                result.success(null)
+            }
+            call.method == "sendByteMsg" -> {
+                val msg = call.argument<ByteArray>("msg")
+                if (betterWebSocketClient?.isOpen == true)
                     betterWebSocketClient?.send(msg)
                 result.success(null)
             }

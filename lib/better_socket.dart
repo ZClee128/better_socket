@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 
@@ -16,11 +17,15 @@ class BetterSocket {
         'connentSocket', {'path': path, "httpHeaders": httpHeaders});
   }
 
-  static Future<void> sendMsg(String msg) async {
+  static sendMsg(String msg) {
     _channel.invokeMethod('sendMsg', <String, String>{'msg': msg});
   }
 
-  static Future close() async {
+  static sendByteMsg(Uint8List msg) {
+    _channel.invokeMethod('sendByteMsg',<String,Uint8List>{'msg': msg});
+  }
+
+  static close() {
     _channel.invokeMethod('close');
   }
 

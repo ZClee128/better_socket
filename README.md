@@ -17,6 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 ```OC
 iimport 'package:flutter/material.dart';
 import 'package:better_socket/better_socket.dart';
+import 'dart:convert';
 
 class WebSocketRoute extends StatefulWidget {
   @override
@@ -83,7 +84,10 @@ class _WebSocketRouteState extends State<WebSocketRoute> {
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
       // channel.sink.add(_controller.text);
+      <!-- 这个发送字符串 -->
       BetterSocket.sendMsg(_controller.text);
+      <!-- 这个是发送byte[] -->
+      BetterSocket.sendByteMsg(Utf8Encoder().convert('hello'));
     }
   }
 

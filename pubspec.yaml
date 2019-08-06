@@ -1,6 +1,6 @@
 name: better_socket
 description: This is a websocket integrated with native iOS and Android native websocket. 
-version: 1.0.4
+version: 1.0.5
 author: lizhicong <876231865@qq.com>
 homepage: https://github.com/ZClee128/better_socket
 

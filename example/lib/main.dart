@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:better_socket/better_socket.dart';
+// import 'dart:convert' show utf8;
 
 void main() => runApp(MyApp());
 
@@ -13,7 +17,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-
   @override
   void initState() {
     super.initState();
@@ -30,7 +33,9 @@ class _MyAppState extends State<MyApp> {
       //设置监听
       BetterSocket.addListener(onOpen: (httpStatus, httpStatusMessage) {
         print("onOpen---httpStatus:$httpStatus  httpStatusMessage:$httpStatusMessage");
-        BetterSocket.sendMsg("hello");
+        
+        BetterSocket.sendByteMsg(Utf8Encoder().convert('hello'));
+        // BetterSocket.sendMsg('hello');
       }, onMessage: (message) {
         print("onMessage---message:$message");
       }, onClose: (code, reason, remote) {
