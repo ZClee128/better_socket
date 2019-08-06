@@ -83,7 +83,6 @@ class _WebSocketRouteState extends State<WebSocketRoute> {
 
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
-      // channel.sink.add(_controller.text);
       <!-- 这个发送字符串 -->
       BetterSocket.sendMsg(_controller.text);
       <!-- 这个是发送byte[] -->
