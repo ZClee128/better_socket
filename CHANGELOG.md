@@ -16,3 +16,6 @@
 
 ## 1.0.5
 * Add Byte Stream Transport
+
+## 1.0.6
+* Add analysis_options
