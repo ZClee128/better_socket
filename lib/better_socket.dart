@@ -22,7 +22,7 @@ class BetterSocket {
   }
 
   static sendByteMsg(Uint8List msg) {
-    _channel.invokeMethod('sendByteMsg',<String,Uint8List>{'msg': msg});
+    _channel.invokeMethod('sendByteMsg', <String, Uint8List>{'msg': msg});
   }
 
   static close() {
