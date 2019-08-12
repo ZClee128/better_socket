@@ -32,16 +32,20 @@
         self.webSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"path"]]]];
         self.webSocket.delegate = self;
         [self.webSocket open];
+        result(nil);
     } else if ([@"sendMsg" isEqualToString:call.method]){
         NSDictionary *dict = call.arguments;
         [self.webSocket send:dict[@"msg"]];
+        result(nil);
     } else if ([@"sendByteMsg" isEqualToString:call.method]){
         NSDictionary *dict = call.arguments;
         NSData *data = [NSData dataWithData:[dict[@"msg"] data]];
         [self.webSocket send:data];
+        result(nil);
     }
     else if ([@"close" isEqualToString:call.method]) {
         [self.webSocket close];
+        result(nil);
     }
     else {
         result(FlutterMethodNotImplemented);
@@ -54,11 +58,11 @@
     eventResult[@"event"] = @"onMessage";
     eventResult[@"message"] = message;
     self.eventSink(eventResult);
-    NSLog(@"message –> %@", message);
+    // NSLog(@"message –> %@", message);
 }
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
-    NSLog(@"Websocket Connected");
+    // NSLog(@"Websocket Connected");
     NSMutableDictionary *eventResult = [[NSMutableDictionary alloc] init];
     eventResult[@"event"] = @"onOpen";
     eventResult[@"code"] = @(webSocket.readyState);
@@ -69,16 +73,17 @@
 
 //连接失败
 -(void)webSocket:(SRWebSocket* )webSocket didFailWithError:(NSError* )error {
-    NSLog(@"error --> %@", error);
+    // NSLog(@"error --> %@", error);
     NSMutableDictionary *eventResult = [[NSMutableDictionary alloc] init];
     eventResult[@"event"] = @"onError";
-    eventResult[@"message"] = error;
+    eventResult[@"message"] = [NSString stringWithFormat:@"%@",error];
+    self.eventSink(eventResult);
     self.webSocket = nil;
 }
 
 // 连接关闭
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
-    NSLog(@"Closed Reason:%@",reason);
+    // NSLog(@"Closed Reason:%@",reason);
     NSMutableDictionary *eventResult = [[NSMutableDictionary alloc] init];
     eventResult[@"event"] = @"onClose";
     eventResult[@"code"] = @(code);

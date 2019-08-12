@@ -11,9 +11,9 @@ class BetterSocket {
     return version;
   }
 
-  static Future connentSocket(String path,
-      {Map<String, String> httpHeaders}) async {
-    _channel.invokeMethod(
+  static connentSocket(String path,
+      {Map<String, String> httpHeaders}) {
+     _channel.invokeMethod(
         'connentSocket', {'path': path, "httpHeaders": httpHeaders});
   }
 

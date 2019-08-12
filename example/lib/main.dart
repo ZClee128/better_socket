@@ -42,9 +42,9 @@ class _MyAppState extends State<MyApp> {
       }, onError: (message) {
         print("onError---message:$message");
       });
-      var headers = {"origin": "ws://123.207.167.163:9010/ajaxchattest"};
+      var headers = {"origin": "ws://echo.websocket.org"};
 
-      BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest", httpHeaders: headers);
+      BetterSocket.connentSocket("ws://echo.websocket.org", httpHeaders: headers);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }

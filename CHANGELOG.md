@@ -19,3 +19,6 @@
 
 ## 1.0.6
 * Add analysis_options
+
+## 1.0.7
+* Fix bugs
