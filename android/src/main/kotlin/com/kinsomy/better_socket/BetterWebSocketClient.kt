@@ -59,9 +59,9 @@ constructor(serverUri: URI, var queuingEventSink: QueuingEventSink, protocolDraf
     }
 
     override fun onMessage(bytes: ByteBuffer?) {
-        val eventResult = HashMap<String, Any>()
+        val eventResult = HashMap<String, Any?>()
         eventResult["event"] = "onMessage"
-        eventResult["message"] = bytes.toString()
+        eventResult["message"] = bytes
 
         val m = Message()
         m.obj = eventResult
