@@ -14,8 +14,8 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 # Use
-```OC
-iimport 'package:flutter/material.dart';
+```dart
+import 'package:flutter/material.dart';
 import 'package:better_socket/better_socket.dart';
 import 'dart:convert';
 
