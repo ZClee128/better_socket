@@ -31,3 +31,6 @@
 
 ## 1.1.0
 * Fix bugs
+
+## 1.1.1
+* Available flutter 1.8.3
