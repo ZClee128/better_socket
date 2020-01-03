@@ -34,3 +34,6 @@
 
 ## 1.1.1
 * Available flutter 1.8.3
+
+## 1.1.2
+* Fix ios bugs
