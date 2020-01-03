@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
       BetterSocket.addListener(onOpen: (httpStatus, httpStatusMessage) {
         print("onOpen---httpStatus:$httpStatus  httpStatusMessage:$httpStatusMessage");
         
-        BetterSocket.sendByteMsg(Utf8Encoder().convert('hello'));
+        
         // BetterSocket.sendMsg('hello');
       }, onMessage: (message) {
         print("onMessage---message:$message");
@@ -67,7 +67,12 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: FlatButton(
+            onPressed: (){
+              BetterSocket.sendByteMsg(Utf8Encoder().convert('hello'));
+            },
+            child: Text('Running on: $_platformVersion\n'),
+          ),
         ),
       ),
     );

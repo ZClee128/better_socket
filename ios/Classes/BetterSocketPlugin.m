@@ -35,12 +35,16 @@
         result(nil);
     } else if ([@"sendMsg" isEqualToString:call.method]){
         NSDictionary *dict = call.arguments;
-        [self.webSocket send:dict[@"msg"]];
+        if (self.webSocket.readyState == SR_OPEN) {
+            [self.webSocket send:dict[@"msg"]];
+        }
         result(nil);
     } else if ([@"sendByteMsg" isEqualToString:call.method]){
         NSDictionary *dict = call.arguments;
         NSData *data = [NSData dataWithData:[dict[@"msg"] data]];
-        [self.webSocket send:data];
+        if (self.webSocket.readyState == SR_OPEN) {
+            [self.webSocket send:data];
+        }
         result(nil);
     }
     else if ([@"close" isEqualToString:call.method]) {
