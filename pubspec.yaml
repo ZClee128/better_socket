@@ -1,6 +1,6 @@
 name: better_socket
-description: A new flutter plugin project.
-version: 0.0.1
+description: This is a websocket integrated with native iOS and Android native websocket. 
+version: 1.1.2
 author: lizhicong <876231865@qq.com>
 homepage: https://github.com/ZClee128/better_socket
 

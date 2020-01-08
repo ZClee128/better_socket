@@ -6,8 +6,12 @@ import org.java_websocket.client.WebSocketClient
 import org.java_websocket.drafts.Draft
 import org.java_websocket.drafts.Draft_6455
 import org.java_websocket.handshake.ServerHandshake
+import org.java_websocket.util.ByteBufferUtils
 import java.lang.Exception
 import java.net.URI
+import java.nio.ByteBuffer
+import java.util.*
+import kotlin.collections.HashMap
 
 class BetterWebSocketClient @JvmOverloads
 constructor(serverUri: URI, var queuingEventSink: QueuingEventSink, protocolDraft: Draft = Draft_6455(), httpHeaders: Map<String, String>? = null, connectTimeout: Int = 0) : WebSocketClient(serverUri, protocolDraft, httpHeaders, connectTimeout) {
@@ -48,6 +52,16 @@ constructor(serverUri: URI, var queuingEventSink: QueuingEventSink, protocolDraf
         val eventResult = HashMap<String, Any>()
         eventResult["event"] = "onMessage"
         eventResult["message"] = message.toString()
+
+        val m = Message()
+        m.obj = eventResult
+        handler.sendMessage(m)
+    }
+
+    override fun onMessage(bytes: ByteBuffer?) {
+        val eventResult = HashMap<String, Any>()
+        eventResult["event"] = "onMessage"
+        eventResult["message"] = bytes?.array()!!
 
         val m = Message()
         m.obj = eventResult

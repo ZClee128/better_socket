@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:better_socket/better_socket.dart';
+// import 'dart:convert' show utf8;
 
 void main() => runApp(MyApp());
 
@@ -13,7 +16,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-
   @override
   void initState() {
     super.initState();
@@ -30,7 +32,9 @@ class _MyAppState extends State<MyApp> {
       //设置监听
       BetterSocket.addListener(onOpen: (httpStatus, httpStatusMessage) {
         print("onOpen---httpStatus:$httpStatus  httpStatusMessage:$httpStatusMessage");
-        BetterSocket.sendMsg("hello");
+        
+        
+        // BetterSocket.sendMsg('hello');
       }, onMessage: (message) {
         print("onMessage---message:$message");
       }, onClose: (code, reason, remote) {
@@ -38,13 +42,9 @@ class _MyAppState extends State<MyApp> {
       }, onError: (message) {
         print("onError---message:$message");
       });
-      var headers = {"origin": "ws://123.207.167.163:9010/ajaxchattest"};
+      var headers = {"origin": "ws://echo.websocket.org"};
 
-      BetterSocket.connentSocket("ws://123.207.167.163:9010/ajaxchattest", httpHeaders: headers)
-          .then((val) {
-        print(val);
-        //BetterSocket.sendMsg("hello");
-      });
+      BetterSocket.connentSocket("ws://echo.websocket.org", httpHeaders: headers);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -67,9 +67,20 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: FlatButton(
+            onPressed: (){
+              BetterSocket.sendByteMsg(Utf8Encoder().convert('hello'));
+            },
+            child: Text('Running on: $_platformVersion\n'),
+          ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    BetterSocket.close();
+    super.dispose();
   }
 }

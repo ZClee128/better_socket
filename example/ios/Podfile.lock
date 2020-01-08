@@ -10,7 +10,7 @@ DEPENDENCIES:
   - Flutter (from `.symlinks/flutter/ios`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -21,9 +21,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   better_socket: 4588ca97536e848b8389ec6686bf1a6653fcb4b5
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
 PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.3
