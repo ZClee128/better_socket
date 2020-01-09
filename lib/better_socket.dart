@@ -11,9 +11,22 @@ class BetterSocket {
     return version;
   }
 
-  static connentSocket(String path, {Map<String, String> httpHeaders}) {
-    _channel.invokeMethod(
-        'connentSocket', {'path': path, "httpHeaders": httpHeaders});
+  static connentSocket(String path,
+      {Map<String, String> httpHeaders,
+      bool trustAllHost,
+      String keyStorePath,
+      String keyPassword,
+      String storePassword,
+      String keyStoreType}) {
+    _channel.invokeMethod('connentSocket', {
+      'path': path,
+      "httpHeaders": httpHeaders,
+      "keyStorePath": keyStorePath,
+      "trustAllHost": trustAllHost,
+      "keyPassword": keyPassword,
+      "storePassword": storePassword,
+      "keyStoreType": keyStoreType
+    });
   }
 
   static sendMsg(String msg) {
@@ -29,10 +42,7 @@ class BetterSocket {
   }
 
   static void addListener(
-      {Function onOpen,
-      Function onMessage,
-      Function onError,
-      Function onClose}) {
+      {Function onOpen, Function onMessage, Function onError, Function onClose}) {
     EventChannel eventChannel = EventChannel("better_socket/event");
     eventChannel.receiveBroadcastStream().listen((data) {
       print(data);

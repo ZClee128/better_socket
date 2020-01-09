@@ -32,8 +32,7 @@ class _MyAppState extends State<MyApp> {
       //设置监听
       BetterSocket.addListener(onOpen: (httpStatus, httpStatusMessage) {
         print("onOpen---httpStatus:$httpStatus  httpStatusMessage:$httpStatusMessage");
-        
-        
+
         // BetterSocket.sendMsg('hello');
       }, onMessage: (message) {
         print("onMessage---message:$message");
@@ -42,9 +41,9 @@ class _MyAppState extends State<MyApp> {
       }, onError: (message) {
         print("onError---message:$message");
       });
-      var headers = {"origin": "ws://echo.websocket.org"};
+      var headers = {"origin": "wss://echo.websocket.org"};
 
-      BetterSocket.connentSocket("ws://echo.websocket.org", httpHeaders: headers);
+      BetterSocket.connentSocket("wss://echo.websocket.org", httpHeaders: headers);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -68,8 +67,8 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: FlatButton(
-            onPressed: (){
-              BetterSocket.sendByteMsg(Utf8Encoder().convert('hello'));
+            onPressed: () {
+              BetterSocket.sendMsg('hello');
             },
             child: Text('Running on: $_platformVersion\n'),
           ),
