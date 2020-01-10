@@ -33,7 +33,7 @@
         NSString *keyPassword = dict[@"keyPassword"];
         NSString *storePassword = dict[@"storePassword"];
         NSString *keyStoreType = dict[@"keyStoreType"];
-        self.webSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"path"]]] protocols:@[keyStorePath,keyPassword,storePassword,keyStoreType] allowsUntrustedSSLCertificates:[dict[@"trustAllHost"] boolValue]];
+        self.webSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"path"]]] protocols:@[] allowsUntrustedSSLCertificates:[dict[@"trustAllHost"] boolValue]];
         self.webSocket.delegate = self;
         [self.webSocket open];
         result(nil);

@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       });
       var headers = {"origin": "wss://api.matrixone.io/coinsdata/api/MarketsList/"};
 
-      BetterSocket.connentSocket("wss://api.matrixone.io/coinsdata/api/MarketsList/", httpHeaders: headers);
+      BetterSocket.connentSocket("wss://api.matrixone.io/coinsdata/api/MarketsList/", httpHeaders: headers, trustAllHost: true);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -73,8 +73,8 @@ class _MyAppState extends State<MyApp> {
               var data = {"market":"USDT","exchange":"BN"};
       
       
-      // BetterSocket.sendMsg( data.toString());
-      BetterSocket.sendByteMsg(Uint8List.fromList(jsonEncode(data).codeUnits));
+              // BetterSocket.sendMsg( data.toString());
+              BetterSocket.sendByteMsg(Uint8List.fromList(jsonEncode(data).codeUnits));
             },
             child: Text('Running on: $_platformVersion\n'),
           ),

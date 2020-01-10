@@ -37,3 +37,6 @@
 
 ## 1.1.2
 * Fix ios bugs
+
+## 1.1.3
+* Fix Android Socket Certificate validation bugs
