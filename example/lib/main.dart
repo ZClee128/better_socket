@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -41,9 +42,9 @@ class _MyAppState extends State<MyApp> {
       }, onError: (message) {
         print("onError---message:$message");
       });
-      var headers = {"origin": "wss://echo.websocket.org"};
+      var headers = {"origin": "wss://api.matrixone.io/coinsdata/api/MarketsList/"};
 
-      BetterSocket.connentSocket("wss://echo.websocket.org", httpHeaders: headers);
+      BetterSocket.connentSocket("wss://api.matrixone.io/coinsdata/api/MarketsList/", httpHeaders: headers);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -68,7 +69,12 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: FlatButton(
             onPressed: () {
-              BetterSocket.sendMsg('hello');
+              // BetterSocket.sendMsg('hello');
+              var data = {"market":"USDT","exchange":"BN"};
+      
+      
+      // BetterSocket.sendMsg( data.toString());
+      BetterSocket.sendByteMsg(Uint8List.fromList(jsonEncode(data).codeUnits));
             },
             child: Text('Running on: $_platformVersion\n'),
           ),
