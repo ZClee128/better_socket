@@ -33,7 +33,8 @@ class _WebSocketRouteState extends State<WebSocketRoute> {
   void initState() {
     //创建websocket连接
     var headers = {"origin": "ws://echo.websocket.org"};
-    BetterSocket.connentSocket("ws://echo.websocket.org", httpHeaders: headers);
+    //trustAllHost 为true 是通过所有认证
+    BetterSocket.connentSocket("ws://echo.websocket.org", httpHeaders: headers, trustAllHost: true);
     BetterSocket.addListener(onOpen: (httpStatus, httpStatusMessage) {
       print(
           "onOpen---httpStatus:$httpStatus  httpStatusMessage:$httpStatusMessage");
