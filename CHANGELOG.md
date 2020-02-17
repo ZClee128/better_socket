@@ -40,3 +40,6 @@
 
 ## 1.1.3
 * Fix Android Socket Certificate validation bugs
+
+## 1.1.4
+* Fix ios Socket set httpheader bugs

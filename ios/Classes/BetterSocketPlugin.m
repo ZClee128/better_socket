@@ -28,12 +28,15 @@
         NSDictionary *dict = call.arguments;
         self.webSocket.delegate = nil;
         [self.webSocket close];
-        //        NSDictionary *hedaer = dict[@"httpHeaders"];
+        NSDictionary *hedaer = dict[@"httpHeaders"];
         NSString *keyStorePath = dict[@"keyStorePath"];
         NSString *keyPassword = dict[@"keyPassword"];
         NSString *storePassword = dict[@"storePassword"];
         NSString *keyStoreType = dict[@"keyStoreType"];
-        self.webSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"path"]]] protocols:@[] allowsUntrustedSSLCertificates:[dict[@"trustAllHost"] boolValue]];
+        NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:dict[@"path"]]];
+        request.allHTTPHeaderFields = hedaer;
+        self.webSocket = [[SRWebSocket alloc] initWithURLRequest:request protocols:@[] allowsUntrustedSSLCertificates:[dict[@"trustAllHost"] boolValue]];
+        
         self.webSocket.delegate = self;
         [self.webSocket open];
         result(nil);
